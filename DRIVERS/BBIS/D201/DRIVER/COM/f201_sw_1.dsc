@@ -1,8 +1,8 @@
 #************************** BBIS3 board descriptor **************************
 #
 #        Author: ds
-#         $Date: 2000/03/16 16:17:37 $
-#     $Revision: 1.2 $
+#         $Date: 2000/08/17 13:22:43 $
+#     $Revision: 2.1 $
 #
 #   Description: Metadescriptor for F201
 #

@@ -1,30 +1,24 @@
 #************************** BBIS3 board descriptor **************************
 #
 #        Author: ds
-#         $Date: 2000/03/16 16:17:37 $
-#     $Revision: 1.2 $
+#         $Date: 2000/08/17 13:22:47 $
+#     $Revision: 2.1 $
 #
-#   Description: Metadescriptor for F201
+#   Description: Metadescriptor for C203
 #
 #****************************************************************************
 
-F201_SW_1 {
+C203_SW_1 {
 	#------------------------------------------------------------------------
 	#	general parameters (don't modify)
 	#------------------------------------------------------------------------
     DESC_TYPE           = U_INT32  2		# descriptor type (2=board)
-    HW_TYPE             = STRING   F201_SW	# hardware name of device
+    HW_TYPE             = STRING   C203_SW	# hardware name of device
 
 	#------------------------------------------------------------------------
 	#	PCI configuration
 	#------------------------------------------------------------------------
-
-	# define device IDs of bridges to CompactPCI backplane
-	# see D201/DOC/pcibuspath.txt for list
-
-	PCI_BUS_PATH		= BINARY   0x08		# device IDs of bridges to 
-											# compact PCI bus
-    PCI_BUS_SLOT        = U_INT32  3		# Compact PCI bus slot 1=CPU
-    #PCI_BUS_NUMBER     = U_INT32  1		# optional overwrites PCI_BUS_PATH
-    #PCI_DEVICE_ID      = U_INT32 10		# optional overwrites PCI_BUS_SLOT
+    PCI_BUS_NUMBER      = U_INT32  0		# always 0 in standard PCs
+    PCI_DEVICE_ID       = U_INT32 10		# pci device ID (example)
+    PCI_CHECK_LOCATION  = U_INT32  0		# don't check geographic location
 }

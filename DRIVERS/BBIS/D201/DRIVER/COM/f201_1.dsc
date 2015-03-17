@@ -1,19 +1,19 @@
 #************************** BBIS3 board descriptor **************************
 #
 #        Author: ds
-#         $Date: 2000/03/16 16:17:37 $
-#     $Revision: 1.2 $
+#         $Date: 2000/08/17 13:22:42 $
+#     $Revision: 2.1 $
 #
 #   Description: Metadescriptor for F201
 #
 #****************************************************************************
 
-F201_SW_1 {
+F201_1 {
 	#------------------------------------------------------------------------
 	#	general parameters (don't modify)
 	#------------------------------------------------------------------------
     DESC_TYPE           = U_INT32  2		# descriptor type (2=board)
-    HW_TYPE             = STRING   F201_SW	# hardware name of device
+    HW_TYPE             = STRING   F201		# hardware name of device
 
 	#------------------------------------------------------------------------
 	#	PCI configuration
