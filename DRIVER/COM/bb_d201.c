@@ -16,7 +16,7 @@
  *         - C203 / C204
  *
  *  To locate the PCI bus number on which the D201 resides, the user can
- *  specify PCI_BUS_PATH or PCI_BUS_NUMBER. PCI_BUS_PATH specifies an 
+ *  specify PCI_BUS_PATH or PCI_BUS_NUMBER. PCI_BUS_PATH specifies an
  *  exact geographical location in the system, regardless which PCI
  *  devices are present in the system, so PCI_BUS_PATH is preferrable.
  *
@@ -24,15 +24,15 @@
  *  If present, it overrides PCI_BUS_PATH. But note that the bus number may
  *  change if additional devices are installed in the PCI system.
  *
- *  PCI_BUS_PATH is a list of PCI device numbers, that must belong to 
+ *  PCI_BUS_PATH is a list of PCI device numbers, that must belong to
  *  PCI-to-PCI bridges.
  *
  *  Example: To specify the bus of the MEN D002 Compact-PCI bus, carrier board
- *			 the user has to specify the following path: 
+ *			 the user has to specify the following path:
  *
  *			 PCI_BUS_PATH = BINARY 0x08
  *
- *			 0x08 is the device number on Bus 0 of the PCI-to-PCI bridge 
+ *			 0x08 is the device number on Bus 0 of the PCI-to-PCI bridge
  *			 on the D2, that connects the internal PCI bus to the CPCI
  *			 backplane.
  *
@@ -41,19 +41,19 @@
  *  PLX BAR0 bug workaround: The PLX 9050 chip has a bug that might occur
  *  depending on the mapping of BAR0 applied by the BIOS. If Bit7 in BAR0
  *  is set (an address of xxxxxx80), the PLX chip's runtime registers will
- *  not work. 
+ *  not work.
  *
  *  The workaround will be automatically enabled depending of the setting
  *  bit 7 in BAR0. If bit 7 in BAR0 is set, the work around will be enabled
  *
  *  When workaround is enabled, the driver will ignore the BAR0 value set
  *  by the BIOS. Instead, every time the runtime registers need to be accessed,
- *  the driver will write the value of one of BAR2..5 + 0xffff00 into BAR0 
- *	and disables BAR2..5. During this time of course BAR2..5 cannot be 
+ *  the driver will write the value of one of BAR2..5 + 0xffff00 into BAR0
+ *	and disables BAR2..5. During this time of course BAR2..5 cannot be
  *	accessed. This is not a big problem, since the runtime registers will
- *	be accessed only during BrdInit and SetMiface. 
+ *	be accessed only during BrdInit and SetMiface.
  *
- *	When workaround is enabled, getstats M_BB_BLK_ID_xx and 
+ *	When workaround is enabled, getstats M_BB_BLK_ID_xx and
  *	D201_BLK_EEPROM_DATA are disabled (they return ERR_BBIS_EEPROM)
  *
  *
@@ -258,7 +258,7 @@ typedef struct {
 	u_int8		pciPath[D201_BBIS_MAX_PATH]; /* PCI path from desc */
 	u_int32		pciPathLen;			/* number of bytes in pciPath */
 	u_int32		plxBugWa;			/* PLX bug workaround enabled 			*/
-	void		*virtRRaddr2;		/* if PLX bug workaround enabled: 
+	void		*virtRRaddr2;		/* if PLX bug workaround enabled:
 									   contains the virtual address of the
 									   original BAR 0 */
 } BBIS_HANDLE;
@@ -307,15 +307,15 @@ static void   PLDCB_SetConfig(void *arg, u_int8 state);
 
 static int32 ParsePciPath( BBIS_HANDLE *h, u_int32 *pciBusNbrP );
 static int32 PciParseDev(
-	BBIS_HANDLE *h, 
+	BBIS_HANDLE *h,
 	u_int32 pciBusNbr,
 	u_int32 pciDevNbr,
 	int32 *vendorIDP,
 	int32 *deviceIDP,
 	int32 *headTypeP,
 	int32 *secondBusP);
-static int32 PciCfgErr( 
-	BBIS_HANDLE *h, 
+static int32 PciCfgErr(
+	BBIS_HANDLE *h,
 	char *funcName,
 	int32 error,
 	u_int32 pciBusNbr,
@@ -337,7 +337,7 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr );
 #ifdef _ONE_NAMESPACE_PER_DRIVER_
 	extern void BBIS_GetEntry( BBIS_ENTRY *bbisP )
 #else
-    extern void __D201_GetEntry( BBIS_ENTRY *bbisP ) 
+    extern void __D201_GetEntry( BBIS_ENTRY *bbisP )
 #endif
 {
     /* init/exit */
@@ -390,7 +390,7 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr );
  *                - scan descriptor
  *                - identify PCI9050 device
  *                - get base addresses
- *                - map used base addresses 
+ *                - map used base addresses
  *                - get interrupt information
  *
  *                The following descriptor keys are used:
@@ -430,10 +430,10 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr );
  *				  directly.
  *
  *---------------------------------------------------------------------------
- *  Input......:  osHdl     pointer to os specific structure             
- *                descSpec  pointer to os specific descriptor specifier  
- *                brdHdlP   pointer to not initialized board handle structure            
- *  Output.....:  *brdHdlP  initialized board handle structure  
+ *  Input......:  osHdl     pointer to os specific structure
+ *                descSpec  pointer to os specific descriptor specifier
+ *                brdHdlP   pointer to not initialized board handle structure
+ *  Output.....:  *brdHdlP  initialized board handle structure
  *				  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -509,16 +509,16 @@ static int32 D201_Init(
     DBGWRT_1((DBH,"BB - %s_Init\n",BRD_NAME));
 
 	/* PCI_DOMAIN_NUMBER - optional */
-	status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->domainNbr, 
+	status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->domainNbr,
 							 "PCI_DOMAIN_NUMBER");
-							 
+
 	if ( status == ERR_DESC_KEY_NOTFOUND ) {
 		/* default pci domain is 0 */
 		brdHdl->domainNbr = 0;
 	}
 
     /* PCI_BUS_NUMBER - optional */
-    status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->busNbr, 
+    status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->busNbr,
 							 "PCI_BUS_NUMBER");
 
 	if( status == ERR_DESC_KEY_NOTFOUND ){
@@ -526,7 +526,7 @@ static int32 D201_Init(
 		/*--- get PCI path ---*/
 		brdHdl->pciPathLen = D201_BBIS_MAX_PATH;
 
-		status = DESC_GetBinary( brdHdl->descHdl, (u_int8*)"", 0,  
+		status = DESC_GetBinary( brdHdl->descHdl, (u_int8*)"", 0,
 								 brdHdl->pciPath, &brdHdl->pciPathLen,
 								 "PCI_BUS_PATH");
 
@@ -538,7 +538,7 @@ static int32 D201_Init(
 		/*------------------------------------------------------------+
 		|  Now parse the PCI_PATH to determine bus number of devices  |
 		+------------------------------------------------------------*/
-#ifdef DBG	
+#ifdef DBG
 		DBGWRT_2((DBH, " PCI_PATH="));
 		for(i=0; i<brdHdl->pciPathLen; i++){
 			DBGWRT_2((DBH, "0x%x", brdHdl->pciPath[i]));
@@ -551,7 +551,7 @@ static int32 D201_Init(
 			return( Cleanup(brdHdl,status));
 		}
 	} else if( status == ERR_SUCCESS) {
-		DBGWRT_1((DBH,"BB - %s: Using main PCI Bus Number from desc %d\n", 
+		DBGWRT_1((DBH,"BB - %s: Using main PCI Bus Number from desc %d\n",
 				  BRD_NAME, brdHdl->busNbr ));
 	}
 	else {
@@ -585,22 +585,22 @@ static int32 D201_Init(
     /* PLD_LOAD */
     status = DESC_GetUInt32( brdHdl->descHdl, 1, &brdHdl->pldLoad, "PLD_LOAD");
     if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );	
+        return( Cleanup(brdHdl,status) );
 
     /* NONE_A24 */
     status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->noneA24, "NONE_A24");
     if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );	
+        return( Cleanup(brdHdl,status) );
 
     /* MISC_SETMASK */
     status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->miscSetMask, "MISC_SETMASK");
     if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );	
+        return( Cleanup(brdHdl,status) );
 
     /* MISC_CLRMASK */
     status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->miscClrMask, "MISC_CLRMASK");
     if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );	
+        return( Cleanup(brdHdl,status) );
 
     /* exit descHdl */
     status = DESC_Exit( &brdHdl->descHdl );
@@ -614,7 +614,7 @@ static int32 D201_Init(
 	{
 	    DBGWRT_1((DBH,"BB - %s_Init mechSlot to devId\n",BRD_NAME));
 	    /* convert PCI slot into PCI device */
-    	if( (status = OSS_PciSlotToPciDevice( osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+    	if( (status = OSS_PciSlotToPciDevice( osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
     		                                  brdHdl->mechSlot, (int32*)&brdHdl->pciDev)) )
 			return( Cleanup(brdHdl,status) );
 	}
@@ -623,22 +623,22 @@ static int32 D201_Init(
               BRD_NAME, brdHdl->domainNbr, brdHdl->busNbr, brdHdl->pciDev ));
 
 	/* get the vendor Id */
-    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
     	                           brdHdl->pciDev, 0, OSS_PCI_VENDOR_ID, (int32*)&venId)) )
 		return( Cleanup(brdHdl,status) );
 
     /* get the device Id */
-    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
     	                           brdHdl->pciDev, 0, OSS_PCI_DEVICE_ID, (int32*)&devId)) )
 		return( Cleanup(brdHdl,status) );
-    
+
 	/* get the sub vendor Id */
-    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
     	                           brdHdl->pciDev, 0, OSS_PCI_SUBSYS_VENDOR_ID, (int32*)&subVenId)) )
 		return( Cleanup(brdHdl,status) );
 
     /* get the sub device Id */
-    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+    if( (status = OSS_PciGetConfig(osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
     	                           brdHdl->pciDev, 0, OSS_PCI_SUBSYS_ID, (int32*)&subDevId)) )
 		return( Cleanup(brdHdl,status) );
 
@@ -663,7 +663,7 @@ static int32 D201_Init(
 
 	/* read all BARs */
 	for( i=0; i<6; i++ )
-		OSS_PciGetConfig( osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+		OSS_PciGetConfig( osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 		                  brdHdl->pciDev, 0, OSS_PCI_ADDR_0+i, (int32 *)&brdHdl->barValue[i] );
 	/*
 	 * Check if we need to apply the PLX chip workaround!
@@ -675,9 +675,9 @@ static int32 D201_Init(
 	}
 
     /* board runtime registers */
-    if( (status = OSS_BusToPhysAddr( osHdl, OSS_BUSTYPE_PCI, 
+    if( (status = OSS_BusToPhysAddr( osHdl, OSS_BUSTYPE_PCI,
 									 &brdHdl->physRRaddr,
-		                             OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+		                             OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 		                             brdHdl->pciDev,
 									 0, D201_PCI_RR_MEM )) )
 		return( Cleanup(brdHdl,status) );
@@ -692,9 +692,9 @@ static int32 D201_Init(
 
     /* base addresses for M-Module slots */
     for( i=0; i<BRD_SLOT_NBR; i++, j++){
-        if( (status = OSS_BusToPhysAddr( osHdl, OSS_BUSTYPE_PCI, 
+        if( (status = OSS_BusToPhysAddr( osHdl, OSS_BUSTYPE_PCI,
 										 &brdHdl->physModAddr[i],
-										 OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+										 OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 										 brdHdl->pciDev,
 										 0, D201_PCI_M_MEM(i) )) )
 		return( Cleanup(brdHdl,status) );
@@ -707,12 +707,12 @@ static int32 D201_Init(
         else
             res[j].u.mem.physAddr =
 				(void*)( (U_INT32_OR_64)brdHdl->physModAddr[i] + D201_M_CTRL );
- 
+
         res[j].u.mem.size = D201_M_CTRL_SIZE;
     }
 
     /* assign the resources */
-    if( (status = OSS_AssignResources( osHdl, OSS_BUSTYPE_PCI, 
+    if( (status = OSS_AssignResources( osHdl, OSS_BUSTYPE_PCI,
     	                               OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
                                        j, res )) )
 		return( Cleanup(brdHdl,status) );
@@ -723,11 +723,11 @@ static int32 D201_Init(
     | map used base addresses       |
     +------------------------------*/
 	/* board runtime registers */
-	if( (status = OSS_MapPhysToVirtAddr( osHdl, brdHdl->physRRaddr, 
+	if( (status = OSS_MapPhysToVirtAddr( osHdl, brdHdl->physRRaddr,
 										 RR_SIZE,
-										 OSS_ADDRSPACE_MEM, 
+										 OSS_ADDRSPACE_MEM,
 										 OSS_BUSTYPE_PCI,
-										 OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+										 OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 										 &brdHdl->virtRRaddr )) )
 		return( Cleanup(brdHdl,status) );
 
@@ -737,22 +737,22 @@ static int32 D201_Init(
     for( i=0; i<BRD_SLOT_NBR; i++ ){
         /* map the control register space */
         if(brdHdl->noneA24)
-            status = OSS_MapPhysToVirtAddr( 
-				osHdl, 
+            status = OSS_MapPhysToVirtAddr(
+				osHdl,
 				(void*)( (U_INT32_OR_64)brdHdl->physModAddr[i] + D201_M_CTRL_NOA24 ),
 				D201_M_CTRL_SIZE,
-				OSS_ADDRSPACE_MEM, 
+				OSS_ADDRSPACE_MEM,
 				OSS_BUSTYPE_PCI,
-				OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+				OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 				&brdHdl->virtModCtrlAddr[i] );
         else
-            status = OSS_MapPhysToVirtAddr( 
-				osHdl, 
-				(void*)( (U_INT32_OR_64)brdHdl->physModAddr[i] + D201_M_CTRL ), 
+            status = OSS_MapPhysToVirtAddr(
+				osHdl,
+				(void*)( (U_INT32_OR_64)brdHdl->physModAddr[i] + D201_M_CTRL ),
 				D201_M_CTRL_SIZE,
-				OSS_ADDRSPACE_MEM, 
+				OSS_ADDRSPACE_MEM,
 				OSS_BUSTYPE_PCI,
-				OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+				OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 				&brdHdl->virtModCtrlAddr[i] );
         if( status )
 			return( Cleanup(brdHdl,status) );
@@ -762,9 +762,9 @@ static int32 D201_Init(
     | get interrupt information     |
     +------------------------------*/
     /* get interrupt line */
-	status = OSS_PciGetConfig( osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+	status = OSS_PciGetConfig( osHdl, OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 	                           brdHdl->pciDev, 0, OSS_PCI_INTERRUPT_LINE, &brdHdl->irqLevel );
-	
+
 	/* no interrupt connected */
 	if( status || (brdHdl->irqLevel == 0xff) )
 	{
@@ -786,14 +786,14 @@ static int32 D201_Init(
 /****************************** D201_BrdInit ********************************
  *
  *  Description:  Board initialization:
- *                
+ *
  *                - identify board with EEPROM Id
  *                - load PLD
  *                - check the board location
  *                - enable interrupt
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure    
+ *  Input......:  brdHdl    pointer to board handle structure
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -936,7 +936,7 @@ static int32 D201_BrdInit(
     if(brdHdl->checkLoc){
 
         geoAddr = (int8)MREAD_D16(brdHdl->virtModCtrlAddr[0],D201_M_GEOADDR);
-        
+
 		/* geographic address not supported */
         if( (geoAddr & D201_M_GEOADDR_MASK) == 0x00 ){
 			DBGWRT_ERR((DBH,"*** BB - %s_BrdInit: backplane doesn't support "
@@ -979,11 +979,11 @@ static int32 D201_BrdInit(
 /****************************** D201_BrdExit ********************************
  *
  *  Description:  Board deinitialization:
- *                
+ *
  *                - disable interrupt
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
+ *  Input......:  brdHdl    pointer to board handle structure
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -1052,8 +1052,8 @@ static int32 D201_Exit(
  *                the specified board.
  *
  *                The BBIS_BRDINFO_DEVBUSTYPE code returns the bustype of
- *                the specified device - not the board bus type. 
- * 				  
+ *                the specified device - not the board bus type.
+ *
  *                The BBIS_BRDINFO_FUNCTION code returns the information
  *                if an optional BBIS function is supported or not.
  *
@@ -1074,11 +1074,11 @@ static int32 D201_Exit(
  *                characters. The length of the returned string, including
  *                the terminating null character, must not exceed
  *                BBIS_BRDINFO_BRDNAME_MAXSIZE.
- *                Examples: D201 board, PCI device, Chameleon FPGA 
+ *                Examples: D201 board, PCI device, Chameleon FPGA
  *
  *---------------------------------------------------------------------------
- *  Input......:  code      reference to the information we need    
- *                ...       variable arguments                      
+ *  Input......:  code      reference to the information we need
+ *                ...       variable arguments
  *  Output.....:  *...      variable arguments
  *                return    0 | error code
  *  Globals....:  ---
@@ -1172,14 +1172,14 @@ static int32 D201_BrdInfo(
         char	*brdName = va_arg( argptr, char* );
 		char	*from;
 
-		/* 
+		/*
 		 * build hw name (e.g. D201 board)
-		 */  
+		 */
 		from = BRD_NAME;
 	    while( (*brdName++ = *from++) );	/* copy string */
 		from = " board";
 	    while( (*brdName++ = *from++) );	/* copy string */
-		
+
         break;
     }
 
@@ -1227,9 +1227,9 @@ static int32 D201_BrdInfo(
  *                the name of the plugged device.
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure       
- *                code      reference to the information we need    
- *                ...       variable arguments                      
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                code      reference to the information we need
+ *                ...       variable arguments
  *  Output.....:  ...       variable arguments
  *                return    0 | error code
  *  Globals....:  ---
@@ -1239,7 +1239,7 @@ static int32 D201_CfgInfo(
     u_int32         code,
     ... )
 {
-	int32	status=ERR_SUCCESS;	
+	int32	status=ERR_SUCCESS;
     va_list	argptr;
 
     DBGWRT_1((DBH,"BB - %s_CfgInfo\n",BRD_NAME));
@@ -1269,8 +1269,8 @@ static int32 D201_CfgInfo(
 		*domainNbr = brdHdl->domainNbr;
 		mSlot = mSlot; /* dummy access to avoid compiler warning */
 		break;
-	}	
-		
+	}
+
     /* interrupt information */
     case BBIS_CFGINFO_IRQ:
     {
@@ -1308,7 +1308,7 @@ static int32 D201_CfgInfo(
     /* slot information for PnP support*/
     case BBIS_CFGINFO_SLOT:
     {
-		status = CfgInfoSlot( brdHdl, argptr ); 
+		status = CfgInfoSlot( brdHdl, argptr );
         break;
     }
 
@@ -1329,9 +1329,9 @@ static int32 D201_CfgInfo(
  *  Description:  Enable/disable interrupt for specified module slot.
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                enable    interrupt setting                   
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                enable    interrupt setting
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -1361,15 +1361,15 @@ static int32 D201_IrqEnable(
  *  Description:  Called at the beginning of an interrupt.
  *
  *                - DEBUG: print irq information
- *                - determine interrupt reason 
- *                
+ *                - determine interrupt reason
+ *
  *                Note: Bus or timeout interrupts will be cleared.
  *                      Module interrupt must be cleared on the module
  *                      itself and by D201_IrqSrvExit().
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  return    BBIS_IRQ_NO | BBIS_IRQ_MODULE | BBIS_IRQ_EXP
  *  Globals....:  ---
  ****************************************************************************/
@@ -1407,8 +1407,8 @@ static int32 D201_IrqSrvInit(
 					 BRD_NAME,mSlot));
 
         irqEvent |= BBIS_IRQ_EXP;
-		brdHdl->expIrqCount++;	
-        
+		brdHdl->expIrqCount++;
+
 		/* clear bus error interrupt */
         MCLRMASK_D16( brdHdl->virtModCtrlAddr[mSlot], D201_M_INT,
 					  D201_M_INT_BUSERR );
@@ -1420,8 +1420,8 @@ static int32 D201_IrqSrvInit(
 					 BRD_NAME,mSlot));
 
         irqEvent |= BBIS_IRQ_EXP;
-		brdHdl->expIrqCount++;	
-        
+		brdHdl->expIrqCount++;
+
 		/* clear timeout interrupt */
         MCLRMASK_D16( brdHdl->virtModCtrlAddr[mSlot], D201_M_INT,
 					  D201_M_INT_TIMEOUT );
@@ -1457,8 +1457,8 @@ static int32 D201_IrqSrvInit(
  *                - clear module interrupt
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  ---
  *  Globals....:  ---
  ****************************************************************************/
@@ -1481,9 +1481,9 @@ static void D201_IrqSrvExit(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                enable    interrupt setting                   
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                enable    interrupt setting
  *  Output.....:  return    0
  *  Globals....:  ---
  ****************************************************************************/
@@ -1504,8 +1504,8 @@ static int32 D201_ExpEnable(
  *                Do nothing
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  return    BBIS_IRQ_NO
  *  Globals....:  ---
  ****************************************************************************/
@@ -1527,10 +1527,10 @@ static int32 D201_ExpSrv(
  *                - set address mode
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24       
- *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32       
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24
+ *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -1582,14 +1582,14 @@ static int32 D201_SetMIface(
 	PlxBugWorkaroundStart( brdHdl, mSlot );
 
 	rrBusreg = MREAD_D32( brdHdl->virtRRaddr, RR_BUSREG(mSlot) );
-	rrBusreg = (rrBusreg & ~BUSREG_BUSWIDTH) | rrBusWidth;  
+	rrBusreg = (rrBusreg & ~BUSREG_BUSWIDTH) | rrBusWidth;
 	MWRITE_D32( brdHdl->virtRRaddr, RR_BUSREG(mSlot), rrBusreg );
 
 	PlxBugWorkaroundEnd( brdHdl, mSlot );
 
     /* set data mode */
 	mMode = MREAD_D16( brdHdl->virtModCtrlAddr[mSlot], D201_M_MODE );
-	mMode = (u_int16)((mMode & ~D201_M_MODE_DBITS) | mDataMode);  
+	mMode = (u_int16)((mMode & ~D201_M_MODE_DBITS) | mDataMode);
 	MWRITE_D16( brdHdl->virtModCtrlAddr[mSlot], D201_M_MODE, mMode );
 
     /*------------------------------+
@@ -1617,8 +1617,8 @@ static int32 D201_SetMIface(
  *                - disable module interrupt
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
  *  Output.....:  return    0
  *  Globals....:  ---
  ****************************************************************************/
@@ -1665,12 +1665,12 @@ static int32 D201_ClrMIface(
  *                - assign address spaces
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure   
- *                mSlot     module slot number                  
- *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24       
- *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32       
- *                mAddr     pointer to address space            
- *                mSize     size of address space               
+ *  Input......:  brdHdl    pointer to board handle structure
+ *                mSlot     module slot number
+ *                addrMode  MDIS_MODE_A08 | MDIS_MODE_A24
+ *                dataMode  MDIS_MODE_D16 | MDIS_MODE_D32
+ *                mAddr     pointer to address space
+ *                mSize     size of address space
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -1711,14 +1711,14 @@ static int32 D201_GetMAddr(
             *mSize = D201_M_A08_SIZE;
         }
         break;
-    
+
 	/* A24 */
     case MDIS_MA24 :
 		DBGWRT_2((DBH," supply A24 address space\n"));
         *mAddr = (void*)( ( int8*)brdHdl->physModAddr[mSlot] + D201_M_A24);
         *mSize = D201_M_A24_SIZE;
         break;
-    
+
 	/* not A08, not A24 */
     default:
 		DBGWRT_ERR((DBH,"*** %s_GetMAddr: addrMode=0x%x not supported\n",
@@ -1767,10 +1767,10 @@ static int32 D201_GetMAddr(
  *                M_BB_IRQ_EXP_COUNT   exception irq count        0..max
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    		pointer to board handle structure           
- *                mSlot     		module slot number                          
- *                code      		setstat code                                
- *                value32_or_64     setstat value or ptr to blocksetstat data   
+ *  Input......:  brdHdl    		pointer to board handle structure
+ *                mSlot     		module slot number
+ *                code      		setstat code
+ *                value32_or_64     setstat value or ptr to blocksetstat data
  *  Output.....:  return    0 | error code
  *  Globals....:  ---
  ****************************************************************************/
@@ -1833,9 +1833,9 @@ static int32 D201_SetStat(
  *
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    		pointer to board handle structure           
- *                mSlot    			module slot number                          
- *                code      		getstat code                                
+ *  Input......:  brdHdl    		pointer to board handle structure
+ *                mSlot    			module slot number
+ *                code      		getstat code
  *  Output.....:  value32_or_64P    getstat value or ptr to blockgetstat data
  *                return    0 | error code
  *  Globals....:  ---
@@ -1962,8 +1962,8 @@ static int32 D201_Unused( void )		/* nodoc */
  *  Description:  Read 'size' bytes from the EEPROM at offset 'offset'.
  *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl   pointer to board handle structure            
- *                offset   offset in bytes to the EEPROM base address   
+ *  Input......:  brdHdl   pointer to board handle structure
+ *                offset   offset in bytes to the EEPROM base address
  *                size     size in bytes to read / of the ‘Data’ buffer
  *                data     pointer to data buffer
  *  Output.....:  *data    data
@@ -2010,9 +2010,9 @@ static int32 EepromInfo(
  *
  *		          NOTE: The brdHdl handle is invalid after calling this
  *                      function.
- *			   
+ *
  *---------------------------------------------------------------------------
- *  Input......:  brdHdl    pointer to board handle structure           
+ *  Input......:  brdHdl    pointer to board handle structure
  *                retCode	return value
  *  Output.....:  return	retCode
  *  Globals....:  -
@@ -2062,21 +2062,22 @@ static int32 Cleanup(
 			else
 				res[i+1].u.mem.physAddr =
 					(void*)( (U_INT32_OR_64)brdHdl->physModAddr[i] + D201_M_CTRL );
- 
+
 			res[i+1].u.mem.size = D201_M_CTRL_SIZE;
 		}
 		/* unassign the resources */
-		OSS_UnAssignResources( brdHdl->osHdl, OSS_BUSTYPE_PCI, 
+		OSS_UnAssignResources( brdHdl->osHdl, OSS_BUSTYPE_PCI,
 		                       OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 							   D201_RES_NBR, res );
 	}
-	
+
 #endif
     /*------------------------------+
     |  free memory                  |
     +------------------------------*/
     /* release memory for the board handle */
     OSS_MemFree( brdHdl->osHdl, (int8*)brdHdl, brdHdl->ownMemSize);
+    brdHdl = NULL;
 
     /*------------------------------+
     |  return error code            |
@@ -2090,8 +2091,8 @@ static int32 Cleanup(
  *                delay 'msec' milli seconds
  *
  *---------------------------------------------------------------------------
- *  Input......:  arg       argument pointer        
- *                msec      milli seconds to delay  
+ *  Input......:  arg       argument pointer
+ *                msec      milli seconds to delay
  *  Output.....:  ---
  *  Globals....:  ---
  ****************************************************************************/
@@ -2106,7 +2107,7 @@ static void PLDCB_MsecDelay(void *arg, u_int32 msec)		/* nodoc */
  *                get setting of PLD STATUS bit
  *
  *---------------------------------------------------------------------------
- *  Input......:  arg       argument pointer        
+ *  Input......:  arg       argument pointer
  *  Output.....:  return    setting of PLD STATUS bit
  *  Globals....:  ---
  ****************************************************************************/
@@ -2127,7 +2128,7 @@ static u_int8 PLDCB_GetStatus(void *arg)		/* nodoc */
  *                get setting of PLD CONFIG DONE bit
  *
  *---------------------------------------------------------------------------
- *  Input......:  arg       argument pointer        
+ *  Input......:  arg       argument pointer
  *  Output.....:  return    setting of PLD CONFIG DONE bit
  *  Globals....:  ---
  ****************************************************************************/
@@ -2148,7 +2149,7 @@ static u_int8 PLDCB_GetCfgdone(void *arg)		/* nodoc */
  *                set PLD DATA bit
  *
  *---------------------------------------------------------------------------
- *  Input......:  arg       argument pointer        
+ *  Input......:  arg       argument pointer
  *  Output.....:  ---
  *  Globals....:  ---
  ****************************************************************************/
@@ -2172,8 +2173,8 @@ static void PLDCB_SetData(void *arg, u_int8 state)		/* nodoc */
  *                set PLD DCLK bit
  *
  *---------------------------------------------------------------------------
- *  Input......:  arg       argument pointer        
- *                state     bit setting             
+ *  Input......:  arg       argument pointer
+ *                state     bit setting
  *  Output.....:  ---
  *  Globals....:  ---
  ****************************************************************************/
@@ -2197,8 +2198,8 @@ static void PLDCB_SetDclk(void *arg, u_int8 state)		/* nodoc */
  *                set PLD CONFIG bit
  *
  *---------------------------------------------------------------------------
- *  Input......:  arg       argument pointer        
- *                state     bit setting             
+ *  Input......:  arg       argument pointer
+ *                state     bit setting
  *  Output.....:  ---
  *  Globals....:  ---
  ****************************************************************************/
@@ -2219,8 +2220,8 @@ static void PLDCB_SetConfig(void *arg, u_int8 state)		/* nodoc */
 /********************************* ParsePciPath ******************************
  *
  *  Description: Parses the specified PCI_BUS_PATH to find out PCI Bus Number
- *			   
- *			   
+ *
+ *
  *---------------------------------------------------------------------------
  *  Input......: brdHdl			handle
  *  Output.....: returns:	   	error code
@@ -2239,28 +2240,28 @@ static int32 ParsePciPath( BBIS_HANDLE *brdHdl, u_int32 *pciBusNbrP ) 	/* nodoc 
 	for(i=0; i<brdHdl->pciPathLen; i++){
 
 		pciDevNbr = brdHdl->pciPath[i];
-		
+
 		if ( ( i==0 ) && ( 0 != brdHdl->domainNbr ) ) {
-			/* as we do not know the numbering order of busses on pci domains, 
-			   try to find the device on all busses instead of looking for the 
+			/* as we do not know the numbering order of busses on pci domains,
+			   try to find the device on all busses instead of looking for the
 			   first bus on the domain                                        */
 			for(pciBusNbr=0; pciBusNbr<0xff; pciBusNbr++) {
-				error = PciParseDev( brdHdl, OSS_MERGE_BUS_DOMAIN(pciBusNbr, brdHdl->domainNbr), 
+				error = PciParseDev( brdHdl, OSS_MERGE_BUS_DOMAIN(pciBusNbr, brdHdl->domainNbr),
 				                     brdHdl->pciPath[0], &vendorID, &deviceID, &headerType,
 								     &secondBus );
-				if ( error == ERR_SUCCESS ) 
+				if ( error == ERR_SUCCESS )
 					break; /* found device */
 			}
-			
+
 			if ( error != ERR_SUCCESS ) { /* device not found */
 				DBGWRT_ERR((DBH,"*** BB - %s: first device 0x%02x in pci bus path "
 				                "not found on domain %d!\n",
 				                BRD_NAME, brdHdl->pciPath[0], brdHdl->domainNbr ));
-				return error;               
-			}    
+				return error;
+			}
 		} else {
 			/* parse device only once */
-			if( (error = PciParseDev( brdHdl, OSS_MERGE_BUS_DOMAIN(pciBusNbr, brdHdl->domainNbr), 
+			if( (error = PciParseDev( brdHdl, OSS_MERGE_BUS_DOMAIN(pciBusNbr, brdHdl->domainNbr),
 				                      pciDevNbr, &vendorID, &deviceID, &headerType,
 									  &secondBus )))
 				return error;
@@ -2268,7 +2269,7 @@ static int32 ParsePciPath( BBIS_HANDLE *brdHdl, u_int32 *pciBusNbrP ) 	/* nodoc 
 
 		if( vendorID == 0xffff && deviceID == 0xffff ){
 			DBGWRT_ERR((DBH,"*** BB - %s:ParsePciPath: Nonexistant device "
-						"domain %d bus %d dev %d\n", BRD_NAME, brdHdl->domainNbr, 
+						"domain %d bus %d dev %d\n", BRD_NAME, brdHdl->domainNbr,
 						pciBusNbr, pciDevNbr ));
 			return ERR_BBIS_NO_CHECKLOC;
 		}
@@ -2277,13 +2278,13 @@ static int32 ParsePciPath( BBIS_HANDLE *brdHdl, u_int32 *pciBusNbrP ) 	/* nodoc 
 		if( ( headerType & ~OSS_PCI_HEADERTYPE_MULTIFUNCTION ) != OSS_PCI_HEADERTYPE_BRIDGE_TYPE )
 		{
 			DBGWRT_ERR((DBH,"*** BB - %s:ParsePciPath: Device is not a bridge!"
-						"domain %d bus %d dev %d vend=0x%x devId=0x%x headerType %02x\n", 
-						BRD_NAME, brdHdl->domainNbr, pciBusNbr, pciDevNbr, vendorID, 
+						"domain %d bus %d dev %d vend=0x%x devId=0x%x headerType %02x\n",
+						BRD_NAME, brdHdl->domainNbr, pciBusNbr, pciDevNbr, vendorID,
 						deviceID, headerType ));
 
 			return ERR_BBIS_NO_CHECKLOC;
 		}
-			
+
 		/*--- it is a bridge, determine its secondary bus number ---*/
 		DBGWRT_2((DBH, " domain %d bus %d dev %d: vend=0x%x devId=0x%x second bus %d\n",
 				  brdHdl->domainNbr, pciBusNbr, pciDevNbr, vendorID, deviceID, secondBus ));
@@ -2303,8 +2304,8 @@ static int32 ParsePciPath( BBIS_HANDLE *brdHdl, u_int32 *pciBusNbrP ) 	/* nodoc 
 /********************************* PciParseDev ******************************
  *
  *  Description: Get parameters from specified PCI device's config space
- *			   
- *			   
+ *
+ *
  *---------------------------------------------------------------------------
  *  Input......: brdHdl		handle
  *				 pciBusNbr	pci bus number (merged with domain)
@@ -2312,12 +2313,12 @@ static int32 ParsePciPath( BBIS_HANDLE *brdHdl, u_int32 *pciBusNbrP ) 	/* nodoc 
  *  Output.....: returns: 	error code (only fails if config access error)
  *				 *vendorIDP vendor id
  *				 *deviceIDP device id
- *				 *headerTypeP header type 
+ *				 *headerTypeP header type
  *				 *secondBusP secondary bus number (only valid for bridge)
  *  Globals....: -
  ****************************************************************************/
 static int32 PciParseDev(
-	BBIS_HANDLE *brdHdl, 
+	BBIS_HANDLE *brdHdl,
 	u_int32 pciBusNbr,
 	u_int32 pciDevNbr,
 	int32 *vendorIDP,
@@ -2328,7 +2329,7 @@ static int32 PciParseDev(
 	int32 error;
 	int32 pciMainDevNbr;
 	int32 pciDevFunc;
-	
+
 	pciMainDevNbr = pciDevNbr;
 	pciDevFunc = 0;
 
@@ -2340,55 +2341,55 @@ static int32 PciParseDev(
     }
 
 	/*--- check to see if device present ---*/
-	error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc, 
+	error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc,
 							  OSS_PCI_VENDOR_ID, vendorIDP );
-		
+
 	if( error == 0 )
-		error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc, 
+		error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc,
 									  OSS_PCI_DEVICE_ID, deviceIDP );
 
-	if( error ) 
-		return PciCfgErr(brdHdl,"PciParseDev", error, 
+	if( error )
+		return PciCfgErr(brdHdl,"PciParseDev", error,
 						 pciBusNbr,pciDevNbr,OSS_PCI_DEVICE_ID);
 
 	if( *vendorIDP == 0xffff && *deviceIDP == 0xffff )
 		return ERR_SUCCESS;		/* not present */
 
 	/*--- device is present, is it a bridge ? ---*/
-	error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc, 
+	error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc,
 							  OSS_PCI_HEADER_TYPE, headerTypeP );
 
-	if( error ) 
-		return PciCfgErr(brdHdl,"PciParseDev", error, 
+	if( error )
+		return PciCfgErr(brdHdl,"PciParseDev", error,
 						 pciBusNbr,pciDevNbr,OSS_PCI_HEADER_TYPE);
-		
+
 	DBGWRT_2((DBH, " domain %d bus %d dev %d: vend=0x%x devId=%d.%d hdrtype %d\n",
-			  OSS_DOMAIN_NBR( pciBusNbr ), OSS_BUS_NBR( pciBusNbr ), pciMainDevNbr, 
+			  OSS_DOMAIN_NBR( pciBusNbr ), OSS_BUS_NBR( pciBusNbr ), pciMainDevNbr,
 			  pciDevFunc, *vendorIDP, *deviceIDP, *headerTypeP ));
 
-	if( ((*headerTypeP) & ~OSS_PCI_HEADERTYPE_MULTIFUNCTION ) != OSS_PCI_HEADERTYPE_BRIDGE_TYPE )	
+	if( ((*headerTypeP) & ~OSS_PCI_HEADERTYPE_MULTIFUNCTION ) != OSS_PCI_HEADERTYPE_BRIDGE_TYPE )
 		return ERR_SUCCESS;		/* not bridge device */
 
-			
+
 	/*--- it is a bridge, determine its secondary bus number ---*/
-	error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc, 
-							  PCI_SECONDARY_BUS_NUMBER | OSS_PCI_ACCESS_8, 
+	error = OSS_PciGetConfig( brdHdl->osHdl, pciBusNbr, pciMainDevNbr, pciDevFunc,
+							  PCI_SECONDARY_BUS_NUMBER | OSS_PCI_ACCESS_8,
 							  secondBusP );
 
-	if( error ) 
-		return PciCfgErr(brdHdl,"PciParseDev", error, 
+	if( error )
+		return PciCfgErr(brdHdl,"PciParseDev", error,
 						 pciBusNbr,pciDevNbr,
 						 PCI_SECONDARY_BUS_NUMBER | OSS_PCI_ACCESS_8);
-		
+
 	return ERR_SUCCESS;
-}	
+}
 
 
 
 /********************************* PciCfgErr ********************************
  *
  *  Description: Print Debug message
- *			   
+ *
  *---------------------------------------------------------------------------
  *  Input......: brdHdl			handle
  *               funcName		function name
@@ -2399,8 +2400,8 @@ static int32 PciParseDev(
  *  Output.....: return			error code
  *  Globals....: -
  ****************************************************************************/
-static int32 PciCfgErr( 
-	BBIS_HANDLE *brdHdl, 
+static int32 PciCfgErr(
+	BBIS_HANDLE *brdHdl,
 	char *funcName,
 	int32 error,
 	u_int32 pciBusNbr,
@@ -2409,7 +2410,7 @@ static int32 PciCfgErr(
 {
 	int32 pciMainDevNbr;
 	int32 pciDevFunc;
-	
+
 	pciMainDevNbr = pciDevNbr;
 	pciDevFunc = 0;
 
@@ -2419,10 +2420,10 @@ static int32 PciCfgErr(
     	pciDevFunc = pciDevNbr >> 5;
     	pciMainDevNbr = ( pciDevNbr & 0x0000001f );
     }
-    
+
 	DBGWRT_ERR((DBH,"*** BB - %s %s: PCI access error 0x%x "
-				"domain %d bus %d dev %d.%d reg 0x%x\n", BRD_NAME, funcName, error, 
-				OSS_DOMAIN_NBR( pciBusNbr ), OSS_BUS_NBR( pciBusNbr ), 
+				"domain %d bus %d dev %d.%d reg 0x%x\n", BRD_NAME, funcName, error,
+				OSS_DOMAIN_NBR( pciBusNbr ), OSS_BUS_NBR( pciBusNbr ),
 				pciMainDevNbr, pciDevFunc, reg ));
 	return error;
 }
@@ -2454,13 +2455,13 @@ static const u_int32 localMap[] = {
 /********************************* PlxBugWorkaroundStart *********************
  *
  *  Description: Set BAR0 to the value of another BAR that is at least
- *				 256 byte aligned. 
- *			   
+ *				 256 byte aligned.
+ *
  *			     Does nothing when PLX bug workaround is not enabled
  *
- *				 This routine should only be called from BrdInit(), 
+ *				 This routine should only be called from BrdInit(),
  *				 ClrMiface() or SetMiface().
- *	
+ *
  *				 PlxBugWorkaroundEnd() must be called when finished
  *---------------------------------------------------------------------------
  *  Input......: brdHdl			handle
@@ -2471,17 +2472,17 @@ static const u_int32 localMap[] = {
 static void PlxBugWorkaroundStart( BBIS_HANDLE *brdHdl, int32 slot )	/* nodoc */
 {
 	if( brdHdl->plxBugWa ){
-		
+
 		/*
 		 * disable the BARx in LASxBA
 		 * Note: the writes will work, but reads to virtRRaddr2 not!
 		 */
 		MWRITE_D32( brdHdl->virtRRaddr2, 0x14 + (slot * 4), localMap[slot] );
-		
+
 		/*--- write BARx's value + 0xffff00 to BAR 0 ---*/
-		OSS_PciSetConfig( brdHdl->osHdl, 
+		OSS_PciSetConfig( brdHdl->osHdl,
 		                  OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
-						  brdHdl->pciDev, 0, OSS_PCI_ADDR_0, 
+						  brdHdl->pciDev, 0, OSS_PCI_ADDR_0,
 						  brdHdl->barValue[2+slot] + D201_M_CTRL);
 
 		/*--- setup the virtRRaddr accordingly ---*/
@@ -2492,8 +2493,8 @@ static void PlxBugWorkaroundStart( BBIS_HANDLE *brdHdl, int32 slot )	/* nodoc */
 /********************************* PlxBugWorkaroundEnd ***********************
  *
  *  Description: Finish PLX bug workaround
- *			   
- *			   
+ *
+ *
  *---------------------------------------------------------------------------
  *  Input......: brdHdl			handle
  *				 slot			the slot that is currently in operation
@@ -2505,20 +2506,20 @@ static void PlxBugWorkaroundEnd( BBIS_HANDLE *brdHdl, int32 slot )	/* nodoc */
 	if( brdHdl->plxBugWa ){
 
 		/*--- rewrite org. value to BAR 0 */
-		OSS_PciSetConfig( brdHdl->osHdl, 
+		OSS_PciSetConfig( brdHdl->osHdl,
 		                  OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
-						  brdHdl->pciDev, 0, OSS_PCI_ADDR_0, 
+						  brdHdl->pciDev, 0, OSS_PCI_ADDR_0,
 						  brdHdl->barValue[0]);
-		
+
 		/*--- enable again BARx space ---*/
 		MWRITE_D32( brdHdl->virtRRaddr2, 0x14 + (slot * 4), localMap[slot]+0x1 );
 
 		/*--- rewrite org. value to BAR 2..5 */
-		OSS_PciSetConfig( brdHdl->osHdl, 
+		OSS_PciSetConfig( brdHdl->osHdl,
 		                  OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
-						  brdHdl->pciDev, 0, OSS_PCI_ADDR_2+slot, 
+						  brdHdl->pciDev, 0, OSS_PCI_ADDR_2+slot,
 						  brdHdl->barValue[2+slot]);
-		
+
 		brdHdl->virtRRaddr = brdHdl->virtRRaddr2;
 	}
 }
@@ -2526,21 +2527,21 @@ static void PlxBugWorkaroundEnd( BBIS_HANDLE *brdHdl, int32 slot )	/* nodoc */
 /********************************* CfgInfoSlot ******************************
  *
  *  Description:  Fulfils the BB_CfgInfo(BBIS_CFGINFO_SLOT) request
- * 
+ *
  *				  The variable-argument list (argptr) contains the following
  *                parameters in the given order:
  *
  *                Input
  *                -----
- *                mSlot (u_int32) - device slot number  
+ *                mSlot (u_int32) - device slot number
  *
  *                Output
  *                ------
  *                occupied (u_int32*) - occupied information
- *                 - pluggable device: 
+ *                 - pluggable device:
  *                   BBIS_SLOT_OCCUP_YES if slot is occupied
  *                   or BBIS_SLOT_OCCUP_NO if slot is empty
- *                 - onboard device: 
+ *                 - onboard device:
  *                   BBIS_SLOT_OCCUP_ALW if device is enabled
  *                   or BBIS_SLOT_OCCUP_DIS if device is disabled
  *
@@ -2548,17 +2549,17 @@ static void PlxBugWorkaroundEnd( BBIS_HANDLE *brdHdl, int32 slot )	/* nodoc */
  *                  The device id should identify the type of the device
  *                  but should not contain enough information to differentiate
  *                  between two identical devices. If the device id is unknown
- *                  BBIS_SLOT_NBR_UNK must be returned. 
+ *                  BBIS_SLOT_NBR_UNK must be returned.
  *                  - M-Module:
  *                    id-prom-magic-word << 16 | id-prom-module-id
  *                    Example: 0x53460024
  *                    Note: The returned device id must be identical to the
- *                          "autoid" value in the device drivers xml file.  
+ *                          "autoid" value in the device drivers xml file.
  *
  *                devRev (u_int32*) - device revision (4-byte hex value)
  *                  - M-Module: id-prom-layout-revision << 16 |
  *                              id-prom-product-variant
- *                              example: 0x01091400       
+ *                              example: 0x01091400
  *                    or BBIS_SLOT_NBR_UNK if device revision is unknown
  *
  *                slotName (char*) - slot name
@@ -2584,10 +2585,10 @@ static void PlxBugWorkaroundEnd( BBIS_HANDLE *brdHdl, int32 slot )	/* nodoc */
  *                  characters or blanks. The length of the returned string,
  *                  including the terminating null character, must not exceed
  *                  BBIS_SLOT_STR_MAXSIZE.
- * 
+ *
  *                  Examples:
  *                  - M-Module:		"M34", "MS9"
- *                  
+ *
  *                  If the device name is unknown BBIS_SLOT_STR_UNK must
  *                  be returned.
  *
@@ -2645,20 +2646,20 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr )	/* nodoc */
 		INT_ENABLE( brdHdl );	/* enable interrupt */
 		return status;
 	}
-	
+
 	/* init module slot */
 	if( (status = D201_SetMIface( brdHdl, mSlot, MDIS_MA08, MDIS_MD16 )) ){
 		INT_ENABLE( brdHdl );	/* enable interrupt */
 		return status;
 	}
-	
+
 	/*
 	 * map module address space
 	 * (quick and dirty without resource assignment)
-	 */ 
+	 */
 	if( (status = OSS_MapPhysToVirtAddr( brdHdl->osHdl, physModAddr, modAddrSize,
 										 OSS_ADDRSPACE_MEM, OSS_BUSTYPE_PCI,
-										 OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr), 
+										 OSS_MERGE_BUS_DOMAIN(brdHdl->busNbr, brdHdl->domainNbr),
 										 &virtModAddr )) ){
 		D201_ClrMIface( brdHdl, mSlot );
 		INT_ENABLE( brdHdl );	/* enable interrupt */
@@ -2675,7 +2676,7 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr )	/* nodoc */
 	/*
 	 * If a m-module hasn't asserted DTACK# within 16us
 	 * after the assertion of CS# we get an timeout interrupt.
-	 * In this case, we asume that no m-module is plugged in the slot. 
+	 * In this case, we asume that no m-module is plugged in the slot.
 	 */
 	OSS_MikroDelay(brdHdl->osHdl, 20);	/* wait 20us */
 
@@ -2691,7 +2692,7 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr )	/* nodoc */
 		/* clear timeout interrupt */
 		MCLRMASK_D16( brdHdl->virtModCtrlAddr[mSlot], D201_M_INT,
 					  D201_M_INT_TIMEOUT );
-		
+
 		/* set occupied info */
 		*occupied = BBIS_SLOT_OCCUP_NO;
 	}
@@ -2700,7 +2701,7 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr )	/* nodoc */
 	+------------------------------*/
 	else {
 		/* set occupied info */
-		*occupied = BBIS_SLOT_OCCUP_YES;	
+		*occupied = BBIS_SLOT_OCCUP_YES;
 	}
 
 	/* unmap module address space */
@@ -2711,13 +2712,13 @@ static int32 CfgInfoSlot( BBIS_HANDLE *brdHdl, va_list argptr )	/* nodoc */
 
 	INT_ENABLE( brdHdl );	/* enable interrupt */
 
-	/* return on error */ 
+	/* return on error */
 	if( status )
 		return status;
 	if( status2 )
 		return status2;
 
-	/* return on success */ 
+	/* return on success */
 	return ERR_SUCCESS;
 }
 
