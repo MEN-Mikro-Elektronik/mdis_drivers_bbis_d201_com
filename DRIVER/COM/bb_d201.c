@@ -508,8 +508,8 @@ static int32 D201_Init(
     /* DEBUG_LEVEL_DESC */
     status = DESC_GetUInt32(brdHdl->descHdl, OSS_DBG_DEFAULT, &value,
 		"DEBUG_LEVEL_DESC");
-    if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );
+	if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
+		return( Cleanup(brdHdl,status) );
 
 	/* set debug level for DESC module */
 	DESC_DbgLevelSet(brdHdl->descHdl, value);
@@ -575,15 +575,15 @@ static int32 D201_Init(
     /* PCI_DEVICE_ID */
     status = DESC_GetUInt32( brdHdl->descHdl, 0xffff, &brdHdl->pciDev,
                 "PCI_DEVICE_ID");
-    if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
-        return( Cleanup(brdHdl,status) );
+	if( status && (status!=ERR_DESC_KEY_NOTFOUND) )
+		return( Cleanup(brdHdl,status) );
 
 	if(status==ERR_DESC_KEY_NOTFOUND)
 	{
-	    /* PCI_BUS_SLOT - required - if PCI_DEVICE_ID not given */
-    	status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->mechSlot, "PCI_BUS_SLOT");
-    	if( status )
-        	return( Cleanup(brdHdl,status) );
+		/* PCI_BUS_SLOT - required - if PCI_DEVICE_ID not given */
+		status = DESC_GetUInt32( brdHdl->descHdl, 0, &brdHdl->mechSlot, "PCI_BUS_SLOT");
+		if( status )
+			return( Cleanup(brdHdl,status) );
     }
 
     /* PCI_CHECK_LOCATION */
@@ -1190,9 +1190,9 @@ static int32 D201_BrdInfo(
 		 * build hw name (e.g. D201 board)
 		 */
 		from = BRD_NAME;
-	    while( (*brdName++ = *from++) );	/* copy string */
+		while( (*brdName++ = *from++) );	/* copy string */
 		from = " board";
-	    while( (*brdName++ = *from++) );	/* copy string */
+		while( (*brdName++ = *from++) );	/* copy string */
 
         break;
     }
