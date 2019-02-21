@@ -10,33 +10,9 @@
  *
  *     Switches: D201_VARIANT
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: d201.h,v $
- * Revision 1.11  2001/11/14 16:51:49  Schmidt
- * GetEntry function renamed to __D201_GetEntry for D201D302 BBIS
- *
- * Revision 1.10  2000/06/13 09:49:52  kp
- * Corrected offsets to 16 bit regs for BIG_ENDIAN and BYTESWAP
- * (only relevant if M-module is in D32 mode)
- *
- * Revision 1.9  2000/03/09 12:18:57  kp
- * D201_GLOBNAME macro now used to prefix global symbols
- * Added offset to 16 bit regs in swapped mode
- *
- * Revision 1.8  2000/03/01 14:56:47  kp
- * EepromReadBuf was a global symbol. Renamed this variant specific
- * Removed all global (static variables). Sustituted with defines
- * Made PLD data const array
- *
- * Revision 1.7  1999/09/08 09:30:12  Schmidt
- * all new written, old history entries 1.2..1.6 removed
- *
- * Revision 1.1  1998/02/23 17:39:03  Schmidt
- * Added by mcvs
  *
  *---------------------------------------------------------------------------
- * (c) Copyright 1998 by MEN mikro elektronik GmbH, Nuremberg, Germany
+ * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
  ******************************************************************************/
 /*
  * This program is free software: you can redistribute it and/or modify

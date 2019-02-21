@@ -14,39 +14,9 @@
  *
  *---------------------------[ Public Functions ]----------------------------
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: d201_pld.c,v $
- * Revision 1.9  2004/06/21 10:25:00  dpfeuffer
- * cosmetics
- *
- * Revision 1.8  2004/03/11 09:14:19  dpfeuffer
- * ident string was wrong
- *
- * Revision 1.7  2001/01/11 12:16:35  Schmidt
- * PLD 1R4
- *
- * Revision 1.6  2000/06/13 09:49:46  kp
- * PLD 1R3
- *
- * Revision 1.5  2000/03/01 14:56:50  kp
- * EepromReadBuf was a global symbol. Renamed this variant specific
- * Removed all global (static variables). Sustituted with defines
- * Made PLD data const array
- *
- * Revision 1.4  1999/09/08 09:29:58  Schmidt
- * D201_PldIdentD201() added
- * d201_ttf renamed to G_D201_ttfD201
- * new PLD data (D201_1R2.TTF) with trigger support
- *
- * Revision 1.3  1998/09/21 11:32:39  Schmidt
- * D201_FlexIdentString : removed
- *
- * Revision 1.2  1998/08/06 13:58:54  Schmidt
- * header added
  *
  *---------------------------------------------------------------------------
- * (c) Copyright 1998 by MEN mikro elektronik GmbH, Nuremberg, Germany
+ * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
  ******************************************************************************/
 /*
  * This program is free software: you can redistribute it and/or modify

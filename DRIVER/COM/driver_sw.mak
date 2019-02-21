@@ -6,20 +6,8 @@
 #  
 #    Description: makefile descriptor for D201 Base Board Handler (swapped)
 #                      
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_sw.mak,v $
-#   Revision 1.3  2004/03/10 17:31:40  dpfeuffer
-#   id lib/include added
-#
-#   Revision 1.2  2000/03/13 08:18:30  kp
-#   Must use pld_sw rather pld lib
-#
-#   Revision 1.1  2000/03/09 12:19:14  kp
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
-#   (c) Copyright 2000 by MEN mikro elektronik GmbH, Nuernberg, Germany 
+#   Copyright (c) 2000-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
