@@ -6,20 +6,8 @@
 #  
 #    Description: makefile descriptor for C204 Base Board Handler (swapped)
 #                      
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_c204_sw.mak,v $
-#   Revision 1.3  2004/03/10 17:31:44  dpfeuffer
-#   id lib/include added
-#
-#   Revision 1.2  2000/03/13 08:18:34  kp
-#   Must use pld_sw rather pld lib
-#
-#   Revision 1.1  2000/03/09 12:19:16  kp
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
-#   (c) Copyright 1999 by MEN mikro elektronik GmbH, Nuernberg, Germany 
+#   Copyright (c) 1999-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

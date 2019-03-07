@@ -34,34 +34,9 @@
  *  
  *  EepromReadBuf(MiscCtrlReg, *dest, location, wcount)
  *  
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: bb_d201e.c,v $
- * Revision 1.7  2009/08/05 17:33:31  CRuff
- * R: make 64bit compatible
- * M: change function signatures; use U_INT32_OR_64 for address parameters
- *
- * Revision 1.6  2008/09/26 13:54:39  ufranke
- * R: diab compiler warning
- * M: cosmetics
- *
- * Revision 1.5  2000/06/21 16:12:54  Schmidt
- * include <MEN/dbg.h> added
- *
- * Revision 1.4  2000/03/09 12:18:53  kp
- * cosmetics
- *
- * Revision 1.3  2000/02/24 16:43:04  Franke
- * big endian bug removed
- *
- * Revision 1.2  1998/09/21 11:32:52  Schmidt
- * IdentString : removed
- *
- * Revision 1.1  1998/02/23 17:38:58  Schmidt
- * Added by mcvs
  *
  *---------------------------------------------------------------------------
- * (c) Copyright 1998 by MEN mikro elektronik GmbH, Nuremberg, Germany 
+ * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
  ******************************************************************************/
 /*
  * This program is free software: you can redistribute it and/or modify

@@ -6,32 +6,8 @@
 #  
 #    Description: makefile descriptor for D201 Base Board Handler
 #                      
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver.mak,v $
-#   Revision 1.7  2004/03/10 17:31:28  dpfeuffer
-#   id lib/include added
-#
-#   Revision 1.6  2000/03/09 12:19:04  kp
-#   changed D201 switch to _D201
-#
-#   Revision 1.5  1999/11/03 10:14:35  Gromann
-#   bugfix dependencies
-#
-#   Revision 1.4  1999/09/08 09:30:18  Schmidt
-#   updated
-#
-#   Revision 1.3  1998/09/21 11:32:33  Schmidt
-#   ident.c added
-#
-#   Revision 1.2  1998/07/29 16:28:54  Schmidt
-#   $Header removed, dbg.lib and dbg.h added
-#
-#   Revision 1.1  1998/02/23 17:38:47  Schmidt
-#   Added by mcvs
-#   
 #-----------------------------------------------------------------------------
-#   (c) Copyright 1998 by MEN mikro elektronik GmbH, Nuernberg, Germany 
+#   Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by

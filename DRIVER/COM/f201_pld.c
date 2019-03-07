@@ -14,28 +14,9 @@
  *
  *---------------------------[ Public Functions ]----------------------------
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: f201_pld.c,v $
- * Revision 1.5  2004/03/11 09:14:21  dpfeuffer
- * ident string was wrong
- *
- * Revision 1.4  2001/01/11 12:16:42  Schmidt
- * PLD 1R4
- *
- * Revision 1.3  2000/06/13 09:49:48  kp
- * PLD 1R3
- *
- * Revision 1.2  2000/03/01 14:56:52  kp
- * EepromReadBuf was a global symbol. Renamed this variant specific
- * Removed all global (static variables). Sustituted with defines
- * Made PLD data const array
- *
- * Revision 1.1  1999/09/08 09:30:04  Schmidt
- * Initial Revision
  *
  *---------------------------------------------------------------------------
- * (c) Copyright 1999 by MEN mikro elektronik GmbH, Nuremberg, Germany
+ * Copyright (c) 1999-2019, MEN Mikro Elektronik GmbH
  ******************************************************************************/
 /*
  * This program is free software: you can redistribute it and/or modify

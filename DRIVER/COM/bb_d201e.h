@@ -27,29 +27,9 @@
  *
  *	*************************************************************************
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: bb_d201e.h,v $
- * Revision 1.5  2009/08/06 09:04:19  CRuff
- * R: make 64bit compatible
- * M: change signature of EepromReadBuf; use type U_INT32_OR_64 for address
- *
- * Revision 1.4  2000/03/09 12:18:59  kp
- * D201_GLOBNAME macro now used to prefix global symbols
- *
- * Revision 1.3  2000/03/01 14:56:43  kp
- * EepromReadBuf was a global symbol. Renamed this variant specific
- * Removed all global (static variables). Sustituted with defines
- * Made PLD data const array
- *
- * Revision 1.2  1998/08/04 16:46:30  Schmidt
- * cosmetics
- *
- * Revision 1.1  1998/02/23 17:39:01  Schmidt
- * Added by mcvs
  *
  *---------------------------------------------------------------------------
- * (c) Copyright 1998 by MEN mikro elektronik GmbH, Nuremberg, Germany 
+ * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
  ******************************************************************************/
 /*
  * This program is free software: you can redistribute it and/or modify

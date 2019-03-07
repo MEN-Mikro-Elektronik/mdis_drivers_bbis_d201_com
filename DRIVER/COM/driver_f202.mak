@@ -6,23 +6,8 @@
 #  
 #    Description: makefile descriptor for F202 Base Board Handler
 #                      
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_f202.mak,v $
-#   Revision 1.4  2004/03/10 17:31:37  dpfeuffer
-#   id lib/include added
-#
-#   Revision 1.3  2000/03/09 12:19:12  kp
-#   changed F202 switch to _F202
-#
-#   Revision 1.2  1999/11/03 10:14:45  Gromann
-#   bugfix dependencies
-#
-#   Revision 1.1  1999/09/08 09:30:26  Schmidt
-#   Initial Revision
-#
 #-----------------------------------------------------------------------------
-#   (c) Copyright 1999 by MEN mikro elektronik GmbH, Nuernberg, Germany 
+#   Copyright (c) 1999-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
