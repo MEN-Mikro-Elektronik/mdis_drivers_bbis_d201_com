@@ -4,8 +4,6 @@
  *      Project: d201 board handler
  * 
  *       Author: ds
- *        $Date: 2009/08/05 17:33:31 $
- *    $Revision: 1.7 $
  *
  *  Description: reading words from the d201 EEPROM (NMC93CS46)
  *                      

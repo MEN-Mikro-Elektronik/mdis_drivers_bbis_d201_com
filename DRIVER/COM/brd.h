@@ -3,8 +3,6 @@
  *         Name: brd.h
  *
  *       Author: ds
- *        $Date: 2000/03/09 12:19:02 $
- *    $Revision: 1.4 $
  *
  *  Description: D201 BBIS - Board specific defines and prototypes
  *

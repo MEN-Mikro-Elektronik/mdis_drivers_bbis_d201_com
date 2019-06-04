@@ -4,8 +4,6 @@
  *      Project: D201 board handler
  *
  *       Author: ds
- *        $Date: 2004/03/11 09:14:21 $
- *    $Revision: 1.5 $
  *
  *  Description: F201 PLD data
  *
@@ -40,6 +38,7 @@
 #include <MEN/men_typs.h>
 #include "d201.h"
 
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /****************************** F201_PldIdent *******************************
  *
@@ -52,7 +51,7 @@
  ****************************************************************************/
 extern char* PldIdent( void )
 {
-	return ("F201 - F201 pld data 1R4: $Id: f201_pld.c,v 1.5 2004/03/11 09:14:21 dpfeuffer Exp $");
+	return( (char*) IdentString );
 }
 
 /* 14751+4 data bytes (f201_1r4.ttf) */

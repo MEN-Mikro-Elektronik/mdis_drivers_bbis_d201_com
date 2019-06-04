@@ -3,8 +3,6 @@
  *         Name: d201.h
  *
  *       Author: ds
- *        $Date: 2001/11/14 16:51:49 $
- *    $Revision: 1.11 $
  *
  *  Description: D201 BBIS - Common defines and prototypes
  *

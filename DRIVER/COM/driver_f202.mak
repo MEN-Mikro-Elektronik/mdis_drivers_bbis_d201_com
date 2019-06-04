@@ -1,8 +1,6 @@
 #***************************  M a k e f i l e  *******************************
 #  
 #         Author: ds
-#          $Date: 2004/03/10 17:31:37 $
-#      $Revision: 1.4 $
 #  
 #    Description: makefile descriptor for F202 Base Board Handler
 #                      
@@ -24,8 +22,13 @@
 
 
 MAK_NAME=f202
+# the next line is updated during the MDIS installation
+STAMPED_REVISION="mdis_drivers_bbis_d201_com_01_70-0-gbd06fd5-dirty_2019-03-07"
+
+DEF_REVISION=MAK_REVISION=$(STAMPED_REVISION)
 
 MAK_SWITCH=$(SW_PREFIX)MAC_MEM_MAPPED \
+		$(SW_PREFIX)$(DEF_REVISION) \
 		   $(SW_PREFIX)_F202 \
 		   $(SW_PREFIX)D201_VARIANT=F202
 

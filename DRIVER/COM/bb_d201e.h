@@ -3,8 +3,6 @@
  *         Name: bb_d201e.h
  *
  *       Author: ds
- *        $Date: 2009/08/06 09:04:19 $
- *    $Revision: 1.5 $
  * 
  *  Description: reading words from the d201 EEPROM (NMC93CS46)
  *                      

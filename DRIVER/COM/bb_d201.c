@@ -4,8 +4,6 @@
  *      Project: D201 board handler
  *
  *       Author: dieter.pfeuffer@men.de
- *        $Date: 2011/05/19 17:24:42 $
- *    $Revision: 2.21 $
  *
  *  Description: D201 board handler routines
  *
@@ -80,7 +78,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-static const char RCSid[]="$Id: bb_d201.c,v 2.21 2011/05/19 17:24:42 CRuff Exp $";
 
 #define _NO_BBIS_HANDLE		/* bb_defs.h: don't define BBIS_HANDLE struct */
 
@@ -167,6 +164,8 @@ typedef struct {
 /* include files which need BBIS_HANDLE */
 #include <MEN/bb_entry.h>	/* bbis jumptable			*/
 #include <MEN/bb_d201.h>	/* D201 bbis header file	*/
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*-----------------------------------------+
 |  PROTOTYPES                              |

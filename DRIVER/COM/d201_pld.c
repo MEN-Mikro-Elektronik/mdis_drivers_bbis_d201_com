@@ -4,8 +4,6 @@
  *      Project: D201 board handler
  *
  *       Author: ds
- *        $Date: 2004/06/21 10:25:00 $
- *    $Revision: 1.9 $
  *
  *  Description: D201 PLD data
  *
@@ -40,6 +38,7 @@
 #include <MEN/men_typs.h>
 #include "d201.h"
 
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /****************************** PldIdent *************************************
  *
@@ -53,7 +52,7 @@
  ****************************************************************************/
 extern char* PldIdent( void ) /* nodoc */
 {
-	return ("D201 - D201 pld data 1R4: $Id: d201_pld.c,v 1.9 2004/06/21 10:25:00 dpfeuffer Exp $");
+	return( (char*) IdentString );
 }
 
 /* NOTE: variable name will be prefixed */

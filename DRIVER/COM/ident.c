@@ -4,8 +4,6 @@
  *      Project: 
  *
  *       Author: ds
- *        $Date: 2014/10/30 12:43:56 $
- *    $Revision: 1.52 $
  *
  *  Description: Return D201 ident string
  *

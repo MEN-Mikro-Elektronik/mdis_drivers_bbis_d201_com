@@ -1,8 +1,6 @@
 #***************************  M a k e f i l e  *******************************
 #  
 #         Author: kp
-#          $Date: 2004/03/10 17:31:40 $
-#      $Revision: 1.3 $
 #  
 #    Description: makefile descriptor for D201 Base Board Handler (swapped)
 #                      
@@ -24,8 +22,13 @@
 
 
 MAK_NAME=d201_sw
+# the next line is updated during the MDIS installation
+STAMPED_REVISION="mdis_drivers_bbis_d201_com_01_70-0-gbd06fd5-dirty_2019-03-07"
+
+DEF_REVISION=MAK_REVISION=$(STAMPED_REVISION)
 
 MAK_SWITCH=$(SW_PREFIX)MAC_MEM_MAPPED 	\
+		$(SW_PREFIX)$(DEF_REVISION) \
 		   $(SW_PREFIX)MAC_BYTESWAP 	\
 		   $(SW_PREFIX)_D201 			\
 		   $(SW_PREFIX)D201_VARIANT=D201_SW
