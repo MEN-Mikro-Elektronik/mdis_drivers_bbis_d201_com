@@ -1,30 +1,12 @@
 /***********************  I n c l u d e  -  F i l e  ************************
- *  
+ *
  *         Name: bb_d201e.h
  *
  *       Author: ds
- * 
+ *
  *  Description: reading words from the d201 EEPROM (NMC93CS46)
- *                      
+ *
  *     Switches: -
- *
- *	NOTE:	The most part of this code is an extract from 'PCI.C',
- *			a source file from the PLXmon Programm (see the header below). 
- *	************************************************************************
- *
- *	PCI.C
- *
- *	User application level code for showing and programming PCI devices.
- *	Emphasis on PLX devices.
- *	Designed as a component of PLX's general-purpose monitor program.
- *
- *	Copyright PLX Technology, 1996
- *
- *	Changes
- *	960521	Ryan	Genesis - PCI BIOS and PCI device interface
- *
- *	*************************************************************************
- *
  *
  *---------------------------------------------------------------------------
  * Copyright (c) 1998-2019, MEN Mikro Elektronik GmbH
